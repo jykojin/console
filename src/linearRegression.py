@@ -25,7 +25,7 @@ init = tf.global_variables_initializer()
 #start training
 with tf.Session() as sess:
     sess.run(init)
-    writer = tf.summary.FileWriter("../linear", sess.graph)
+    writer = tf.summary.FileWriter("C:/Temp/log/linear", sess.graph)
     writer.close()
 
     for i in range(100):
