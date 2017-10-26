@@ -9,7 +9,7 @@ print(mnist.train.images.shape)
 
 batch_size = 128
 X = tf.placeholder(tf.float32, [batch_size, 784], name="X")
-Y = tf.placeholder(tf.float32, [batch_size, 10], name="Y")
+Y = tf.placeholder(tf.int32, [batch_size, 10], name="Y")
 
 w = tf.Variable(tf.random_normal(shape=[784, 10], stddev=0.01), name="weight")
 b = tf.Variable(tf.zeros([1, 10]), name="bias")
