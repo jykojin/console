@@ -13,11 +13,11 @@ Y = tf.placeholder(tf.int32, [None, 10], name="Y")
 # prepare param
 hidden_1 = 256
 hidden_2 = 256
-input = 784
+input_data = 784
 classification = 10
 
 weights = {
-    'h1': tf.Variable(tf.random_normal([input, hidden_1]), name="w1"),
+    'h1': tf.Variable(tf.random_normal([input_data, hidden_1]), name="w1"),
     'h2': tf.Variable(tf.random_normal([hidden_1, hidden_2]), name="w2"),
     'out': tf.Variable(tf.random_normal([hidden_2, classification]), name="w")
 }
@@ -66,11 +66,11 @@ with tf.Session() as sess:
 
         for i in range(n_batches):
             X_batch, Y_batch = mnist.train.next_batch(batch_size)
-            _, l = sess.run([optimizer, loss], feed_dict={X: X_batch, Y: Y_batch})
-            avg_loss += l / n_batches
+            _, batch_loss = sess.run([optimizer, loss], feed_dict={X: X_batch, Y: Y_batch})
+            avg_loss += batch_loss / n_batches
 
         if epoch % display_step == 0:
-            print('epoch:', '%04d' % (epoch + 1), 'cost = ', \
+            print('epoch:', '%04d' % (epoch + 1), 'cost = ',
                   "{:.9f}".format(avg_loss))
 
     print("done")
