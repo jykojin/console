@@ -29,6 +29,7 @@ bias = {
 }
 
 
+# define graph
 def multi_layer_perception(x, weights, biases):
     layer1 = tf.add(tf.matmul(x, weights['h1']), biases['b1'], name="fc1")
     layer1 = tf.nn.relu(layer1, name="relu1")
@@ -40,15 +41,20 @@ def multi_layer_perception(x, weights, biases):
     return out_layer
 
 
+# get score
 pred = multi_layer_perception(X, weights, bias)
 
+# loss and optimizer
 learning_rate = 0.01
 loss_all = tf.nn.softmax_cross_entropy_with_logits(logits=pred, labels=Y, name='cross_entropy')
 loss = tf.reduce_mean(loss_all, name="reduce_loss")
 
 optimizer = tf.train.AdamOptimizer(learning_rate).minimize(loss)
+
+# init
 init = tf.global_variables_initializer()
 
+# execute graph
 training_epoch = 15
 
 batch_size = 128
